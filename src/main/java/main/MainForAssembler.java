@@ -1,9 +1,7 @@
 package main;
 
 import assembler.Assembler;
-import spring.Member;
-import spring.MemberRegisterService;
-import spring.RegisterRequest;
+import spring.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,11 +43,32 @@ public class MainForAssembler {
         req.setPassword(arg[3]);
         req.setConfirmPassword(arg[4]);
 
-        if (!req.is)
+        if (!req.isPasswordEqualToConfirmPassword()) {
+            System.out.println("암호와 확인이 일치하지 않습니다.\n");
+            return;
+        }
+        try {
+            regSvc.regist(req);
+            System.out.println("등록했습니다.\n");
+        } catch (DuplicateMemberException e) {
+            System.out.println("이미 존재하는 이메일입니다.\n");
+        }
     }
 
     private static void processChangeCommand(String[] arg) {
-
+        if (arg.length != 4) {
+            printHelp();
+            return;
+        }
+        ChangePasswordService changePwdSvd = assembler.getChangePasswordService();
+        try {
+            changePwdSvd.changePassword(arg[1], arg[2], arg[3]);
+            System.out.println("암호를 병경했습니다.\n");
+        } catch (MemberNotFoundException e) {
+            System.out.println("존재하지 않는 이메일입니다.\n");
+        } catch (WrongIdPasswordException e) {
+            System.out.println("이메일과 암호가 일치하지 않습니다.\n");
+        }
     }
 
     private static void printHelp() {

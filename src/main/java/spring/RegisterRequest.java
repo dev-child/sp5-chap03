@@ -45,4 +45,8 @@ public class RegisterRequest {
         }
         this.password = newPassword;
     }
+
+    public boolean isPasswordEqualToConfirmPassword() {
+        return password.equals(confirmPassword);
+    }
 }

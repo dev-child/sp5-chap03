@@ -8,6 +8,7 @@ class Sp5Chap03ApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println();
     }
 
 }

@@ -47,5 +47,5 @@ public class Member {
         this.password = newPassword;
     }
 
-    
+
 }

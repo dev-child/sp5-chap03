@@ -31,9 +31,17 @@ public class MainForSpring {
             } else if (command.startsWith("change ")) {
                 processChangeCommand(command.split(" "));
                 continue;
+            } else if (command.equals("list")) {
+                processListCommand();
+                continue;
             }
             printHelp();
         }
+    }
+
+    private static void processListCommand() {
+        MemberListPrinter listPrinter = ctx.getBean("listPrinter", MemberListPrinter.class);
+        listPrinter.printAll();
     }
 
     private static void processNewCommand(String[] arg) {

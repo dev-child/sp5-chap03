@@ -46,6 +46,4 @@ public class Member {
             throw new WrongIdPasswordException();
         this.password = newPassword;
     }
-
-
 }

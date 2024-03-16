@@ -10,7 +10,7 @@ public class MemberDao {
 
     private Map<String, Member> map = new HashMap<>();
 
-    public Member selectMyEmail(String email) {
+    public Member selectByEmail(String email) {
         return map.get(email);
     }
 

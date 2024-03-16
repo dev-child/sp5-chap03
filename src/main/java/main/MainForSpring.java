@@ -34,6 +34,9 @@ public class MainForSpring {
             } else if (command.equals("list")) {
                 processListCommand();
                 continue;
+            } else if (command.startsWith("info ")) {
+                processInfoCommand(command.split(" "));
+                continue;
             }
             printHelp();
         }
@@ -91,6 +94,15 @@ public class MainForSpring {
         System.out.println("new 이메일 이름 암호 암호확인");
         System.out.println("change 이메일 현재비번 변경비번");
         System.out.println();
+    }
+
+    public static void processInfoCommand(String[] args) {
+        if (args.length != 2) {
+            printHelp();
+            return;
+        }
+        MemberInfoPrinter infoPrinter = ctx.getBean("infoPrinter", MemberInfoPrinter.class);
+        infoPrinter.printMemberInfo(args[1]);
     }
 
 }
